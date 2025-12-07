@@ -1,0 +1,383 @@
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+
+
+
+    <!-- ==================== صفحة الرسالة ==================== -->
+    <div id="letter-screen">
+        <!-- قلوب متحركة -->
+        <div id="floating-hearts-letter"></div>
+
+        <div class="envelope-wrapper">
+            <!-- العنوان -->
+            <div class="animate-slide-up" style="margin-bottom: 40px;">
+                <div style="display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 12px;">
+                    <span style="font-size: 24px;">✨</span>
+                    <h1 style="font-size: 40px; font-weight: bold; color: var(--rose);" class="text-shadow-soft">
+                        رسالة من القلب
+                    </h1>
+                    <span style="font-size: 24px;">✨</span>
+                </div>
+                <p style="color: var(--muted); font-size: 18px;">إليك يا أغلى الناس 💕</p>
+            </div>
+
+            <!-- الظرف ثلاثي الأبعاد -->
+            <div class="envelope-container" onclick="openEnvelope()" style="width: 320px; height: 220px; margin: 0 auto; cursor: pointer;">
+                <div class="envelope" id="envelope" style="position: relative; width: 100%; height: 100%;">
+                    <!-- خلفية الظرف -->
+                    <div style="position: absolute; inset: 0; border-radius: 16px; box-shadow: 0 25px 50px rgba(0,0,0,0.15); background: linear-gradient(135deg, hsl(340, 50%, 92%) 0%, hsl(340, 45%, 88%) 100%); border: 2px solid hsl(340, 40%, 85%);"></div>
+
+                    <!-- جسم الظرف -->
+                    <div style="position: absolute; inset: 0; top: 30%; border-radius: 0 0 16px 16px; background: linear-gradient(180deg, hsl(340, 55%, 90%) 0%, hsl(340, 50%, 85%) 100%); border: 2px solid hsl(340, 40%, 80%); border-top: none; z-index: 10;">
+                        <!-- نقش زخرفي -->
+                        <div style="position: absolute; inset: 16px; border: 2px dashed hsla(340, 60%, 75%, 0.3); border-radius: 12px;"></div>
+                        <!-- ختم القلب -->
+                        <div id="heart-seal" style="position: absolute; top: 16px; left: 50%; transform: translateX(-50%);">
+                            <div class="animate-heart-beat" style="width: 56px; height: 56px; border-radius: 50%; background: linear-gradient(135deg, var(--soft-pink), var(--rose)); display: flex; align-items: center; justify-content: center; box-shadow: 0 10px 20px rgba(0,0,0,0.15);">
+                                <span style="color: white; font-size: 28px;">❤️</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- غطاء الظرف -->
+                    <div class="envelope-flap" id="envelope-flap" style="position: absolute; top: 0; left: 0; right: 0; height: 45%; background: linear-gradient(180deg, hsl(340, 55%, 88%) 0%, hsl(340, 50%, 85%) 100%); clip-path: polygon(0 0, 50% 80%, 100% 0); border-top: 2px solid hsl(340, 40%, 80%); z-index: 20;"></div>
+
+                    <!-- ورقة الرسالة -->
+                    <div class="letter-paper" id="letter-paper" style="position: absolute; left: 16px; right: 16px; top: 25%; min-height: 180px; background: white; border-radius: 16px 16px 0 0; box-shadow: 0 -5px 20px rgba(0,0,0,0.1); z-index: 5; opacity: 0;">
+                        <div style="padding: 20px; text-align: center; position: relative;">
+                            <!-- إطار زخرفي -->
+                            <div style="position: absolute; inset: 8px; border: 2px solid hsla(340, 60%, 75%, 0.3); border-radius: 12px;"></div>
+                            <div style="position: absolute; inset: 12px; border: 1px dashed hsla(340, 60%, 75%, 0.2); border-radius: 12px;"></div>
+                            
+                            <!-- محتوى الرسالة -->
+                            <div style="position: relative; z-index: 10; padding-top: 10px;">
+                                <p style="color: var(--rose); font-weight: bold; font-size: 20px; margin-bottom: 12px;">حبيبي الغالي 💗</p>
+                                <p style="color: var(--foreground); opacity: 0.8; line-height: 1.8; font-size: 14px;">
+                                    أنت أجمل هدية أعطاني إياها القدر
+                                    <br>
+                                    معك عرفت معنى الحب الحقيقي
+                                    <br>
+                                    كل لحظة معك هي كنز أحفظه في قلبي
+                                </p>
+                                <div style="display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 16px;">
+                                    <span style="color: var(--rose);">❤️</span>
+                                    <span style="color: var(--soft-pink); font-size: 12px;">أحبك للأبد</span>
+                                    <span style="color: var(--rose);">❤️</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- تلميح الضغط -->
+            <div id="click-hint" class="animate-gentle-pulse" style="margin-top: 40px;">
+                <p style="color: var(--muted); display: flex; align-items: center; justify-content: center; gap: 8px;">
+                    <span style="color: var(--soft-pink);">💕</span>
+                    اضغط على الظرف لفتح الرسالة
+                    <span style="color: var(--soft-pink);">💕</span>
+                </p>
+            </div>
+
+            <div id="loading-text" class="hidden animate-slide-up" style="margin-top: 32px;">
+                <p style="color: var(--muted);">جاري الدخول...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== صفحة الباسورد ==================== -->
+    <div id="password-screen" class="hidden">
+        <!-- قلوب متحركة -->
+        <div id="floating-hearts-password"></div>
+
+        <div class="password-card" style="position: relative; z-index: 10;">
+            <!-- لمبات علوية -->
+            <div style="margin-bottom: 24px;">
+                <svg style="width: 100%; height: 30px;" viewBox="0 0 400 30" preserveAspectRatio="none">
+                    <path d="M0,5 Q50,25 100,5 T200,5 T300,5 T400,5" fill="none" stroke="hsl(340, 30%, 50%)" stroke-width="2"/>
+                </svg>
+                <div class="lights-container">
+                    <div class="light-bulb light-pink-bulb animate-twinkle" style="animation-delay: 0s;"></div>
+                    <div class="light-bulb light-white-bulb animate-twinkle" style="animation-delay: 0.25s;"></div>
+                    <div class="light-bulb light-gold-bulb animate-twinkle" style="animation-delay: 0.5s;"></div>
+                    <div class="light-bulb light-rose-bulb animate-twinkle" style="animation-delay: 0.75s;"></div>
+                    <div class="light-bulb light-pink-bulb animate-twinkle" style="animation-delay: 1s;"></div>
+                    <div class="light-bulb light-white-bulb animate-twinkle" style="animation-delay: 1.25s;"></div>
+                    <div class="light-bulb light-gold-bulb animate-twinkle" style="animation-delay: 1.5s;"></div>
+                    <div class="light-bulb light-rose-bulb animate-twinkle" style="animation-delay: 1.75s;"></div>
+                </div>
+            </div>
+
+            <!-- كارت الباسورد -->
+            <div class="card" id="password-card" style="padding: 32px;">
+                <div style="text-align: center; margin-bottom: 32px;">
+                    <div class="animate-glow-pulse" style="width: 96px; height: 96px; margin: 0 auto 20px; background: linear-gradient(135deg, var(--soft-pink), var(--rose)); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 15px 30px rgba(0,0,0,0.15);">
+                        <span id="lock-icon" style="font-size: 48px;" class="animate-heart-beat">❤️</span>
+                    </div>
+                    <h2 style="font-size: 24px; font-weight: bold; color: var(--rose); margin-bottom: 8px;">
+                        ادخل كلمة السر 🔐
+                    </h2>
+                    <p style="color: var(--muted);">
+                        كلمة السر هي سر بيننا فقط 💕
+                    </p>
+                </div>
+
+                <form id="password-form" onsubmit="checkPassword(event)">
+                    <div style="position: relative; margin-bottom: 20px;">
+                        <span style="position: absolute; right: 16px; top: 50%; transform: translateY(-50%); font-size: 20px;">🔑</span>
+                        <input type="password" id="password-input" placeholder="اكتب كلمة السر..." style="padding-right: 48px; text-align: center; font-size: 18px; padding: 20px;">
+                        <p id="error-message" class="hidden" style="color: #e53e3e; font-size: 14px; margin-top: 12px; text-align: center;">
+                            كلمة السر غير صحيحة 💔 حاول مرة تانية
+                        </p>
+                    </div>
+
+                    <button type="submit" class="btn" style="width: 100%; padding: 20px; display: flex; align-items: center; justify-content: center; gap: 8px;">
+                        <span>🔓</span>
+                        افتح قلبي ❤️
+                    </button>
+                </form>
+
+                <!-- قلوب زخرفية -->
+                <div style="display: flex; justify-content: center; gap: 8px; margin-top: 24px;">
+                    <span style="color: var(--soft-pink); opacity: 0.5;">💕</span>
+                    <span style="color: var(--soft-pink); opacity: 0.5;">💕</span>
+                    <span style="color: var(--soft-pink); opacity: 0.5;">💕</span>
+                    <span style="color: var(--soft-pink); opacity: 0.5;">💕</span>
+                    <span style="color: var(--soft-pink); opacity: 0.5;">💕</span>
+                </div>
+            </div>
+
+            <!-- لمبات سفلية -->
+            <div style="margin-top: 24px;">
+                <div class="lights-container">
+                    <div class="light-bulb light-gold-bulb animate-twinkle" style="animation-delay: 0.2s; transform: rotate(180deg);"></div>
+                    <div class="light-bulb light-rose-bulb animate-twinkle" style="animation-delay: 0.4s; transform: rotate(180deg);"></div>
+                    <div class="light-bulb light-pink-bulb animate-twinkle" style="animation-delay: 0.6s; transform: rotate(180deg);"></div>
+                    <div class="light-bulb light-white-bulb animate-twinkle" style="animation-delay: 0.8s; transform: rotate(180deg);"></div>
+                    <div class="light-bulb light-gold-bulb animate-twinkle" style="animation-delay: 1s; transform: rotate(180deg);"></div>
+                    <div class="light-bulb light-rose-bulb animate-twinkle" style="animation-delay: 1.2s; transform: rotate(180deg);"></div>
+                    <div class="light-bulb light-pink-bulb animate-twinkle" style="animation-delay: 1.4s; transform: rotate(180deg);"></div>
+                    <div class="light-bulb light-white-bulb animate-twinkle" style="animation-delay: 1.6s; transform: rotate(180deg);"></div>
+                </div>
+                <svg style="width: 100%; height: 30px;" viewBox="0 0 400 30" preserveAspectRatio="none">
+                    <path d="M0,25 Q50,5 100,25 T200,25 T300,25 T400,25" fill="none" stroke="hsl(340, 30%, 50%)" stroke-width="2"/>
+                </svg>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== الصفحة الرئيسية ==================== -->
+    <div id="main-screen" class="hidden">
+        <!-- قلوب متحركة -->
+        <div id="floating-hearts-main"></div>
+
+        <!-- الهيدر -->
+        <header class="header">
+            <div style="display: flex; align-items: center; justify-content: center; gap: 16px; margin-bottom: 12px;">
+                <span style="font-size: 32px;" class="animate-float">🎄</span>
+                <div>
+                    <h1 style="font-size: 40px; font-weight: bold; color: var(--rose);" class="text-shadow-soft">
+                        حبيبي الغالي
+                    </h1>
+                    <div style="display: flex; align-items: center; justify-content: center; gap: 4px; margin-top: 8px;">
+                        <span style="color: var(--gold-accent);">⭐</span>
+                        <span style="color: var(--gold-accent);">⭐</span>
+                        <span style="color: var(--gold-accent);">⭐</span>
+                        <span style="color: var(--gold-accent);">⭐</span>
+                        <span style="color: var(--gold-accent);">⭐</span>
+                    </div>
+                </div>
+                <span style="font-size: 32px;" class="animate-float" style="animation-delay: 0.5s;">🎁</span>
+            </div>
+            <p style="color: var(--muted); display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 18px;">
+                <span class="animate-heart-beat">💕</span>
+                كل لحظة معك هي هدية من السما
+                <span class="animate-heart-beat" style="animation-delay: 0.3s;">💕</span>
+            </p>
+        </header>
+
+        <!-- المحتوى الرئيسي -->
+        <main class="main-content">
+            <!-- الصف الأول: الموسيقى والاقتباسات -->
+            <div class="grid-2">
+                <!-- مشغل الموسيقى -->
+                <div class="card animate-slide-up" style="animation-delay: 0.1s;">
+                    <audio id="audio-player"></audio>
+                    <div class="music-player">
+                        <div class="music-icon" id="music-icon">
+                            <span style="font-size: 32px;">🎵</span>
+                        </div>
+                        <div style="flex: 1;">
+                            <p id="song-title" style="font-weight: bold; font-size: 18px; color: var(--foreground);"></p>
+                            <p id="song-artist" style="color: var(--muted); font-size: 14px;"></p>
+                            <div style="display: flex; align-items: center; gap: 4px; margin-top: 4px;">
+                                <span style="font-size: 12px;">🎄</span>
+                                <span style="color: var(--muted); font-size: 12px;">أغاني الكريسماس</span>
+                            </div>
+                        </div>
+                        <span class="animate-heart-beat" style="color: var(--rose);">❤️</span>
+                    </div>
+
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progress-fill" style="width: 0%;"></div>
+                    </div>
+
+                    <div class="music-controls">
+                        <button class="control-btn" onclick="prevSong()">⏭️</button>
+                        <button class="control-btn play-btn" id="play-btn" onclick="togglePlay()">▶️</button>
+                        <button class="control-btn" onclick="nextSong()">⏮️</button>
+                    </div>
+
+                    <div class="volume-control">
+                        <button onclick="toggleMute()" id="volume-icon">🔊</button>
+                        <input type="range" class="volume-slider" id="volume-slider" min="0" max="100" value="50" onchange="changeVolume(this.value)">
+                    </div>
+                </div>
+
+                <!-- الاقتباسات -->
+                <div class="card quotes-container animate-slide-up" style="animation-delay: 0.2s;">
+                    <div style="text-align: center; margin-bottom: 16px;">
+                        <div style="width: 56px; height: 56px; margin: 0 auto; background: rgba(255,255,255,0.5); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+                            <span style="font-size: 28px;">"</span>
+                        </div>
+                    </div>
+                    <div class="quote-text animate-fade-in" id="quote-text"></div>
+                    <div class="quote-author" id="quote-author"></div>
+                    <div class="quote-dots" id="quote-dots"></div>
+                </div>
+            </div>
+
+            <!-- العداد التنازلي -->
+            <div class="card animate-slide-up" style="animation-delay: 0.3s; margin-bottom: 24px;">
+                <div class="section-title">
+                    <span class="animate-float">🎉</span>
+                    العد التنازلي لسنة 2025
+                    <span class="animate-twinkle">✨</span>
+                </div>
+                <div class="countdown-grid">
+                    <div class="countdown-item">
+                        <div class="countdown-number animate-glow-pulse" id="countdown-seconds">00</div>
+                        <div class="countdown-label">ثانية ⏱️</div>
+                    </div>
+                    <div class="countdown-item">
+                        <div class="countdown-number animate-glow-pulse" id="countdown-minutes">00</div>
+                        <div class="countdown-label">دقيقة ⏰</div>
+                    </div>
+                    <div class="countdown-item">
+                        <div class="countdown-number animate-glow-pulse" id="countdown-hours">00</div>
+                        <div class="countdown-label">ساعة 🕐</div>
+                    </div>
+                    <div class="countdown-item">
+                        <div class="countdown-number animate-glow-pulse" id="countdown-days">00</div>
+                        <div class="countdown-label">يوم 📅</div>
+                    </div>
+                </div>
+                <div style="text-align: center; margin-top: 24px; padding: 16px; background: hsla(340, 50%, 92%, 0.5); border-radius: 16px;">
+                    <p style="color: var(--rose); font-weight: 500;">
+                        🎆 سنة جديدة سعيدة مليانة حب 💕
+                    </p>
+                </div>
+            </div>
+
+            <!-- معرض الصور -->
+            <div class="card animate-slide-up" style="animation-delay: 0.4s; margin-bottom: 24px;">
+                <div class="section-title">
+                    <span>📷</span>
+                    ألبوم صورنا
+                    <span class="animate-twinkle">✨</span>
+                </div>
+                <div class="photo-grid" id="photo-grid"></div>
+            </div>
+
+            <!-- الذكريات والمناسبات -->
+            <div class="grid-2">
+                <!-- الذكريات -->
+                <div class="card animate-slide-up" style="animation-delay: 0.5s;">
+                    <div class="section-title">
+                        <span class="animate-twinkle" style="color: var(--gold-accent);">⭐</span>
+                        ذكرياتنا الحلوة
+                        <span class="animate-twinkle" style="color: var(--gold-accent); animation-delay: 0.5s;">⭐</span>
+                    </div>
+                    <div class="timeline" id="timeline"></div>
+                    <div style="text-align: center; margin-top: 24px; padding: 16px; background: linear-gradient(90deg, hsla(340, 60%, 75%, 0.2), hsla(340, 55%, 60%, 0.1), hsla(340, 60%, 75%, 0.2)); border-radius: 16px;">
+                        <p style="color: var(--muted);">وذكريات كتير تانية جاية... 💕</p>
+                    </div>
+                </div>
+
+                <!-- المناسبات -->
+                <div class="card animate-slide-up" style="animation-delay: 0.6s;">
+                    <div class="section-title">
+                        <span>📅</span>
+                        مناسباتنا القادمة
+                        <span class="animate-float">🎁</span>
+                    </div>
+                    <div class="dates-list" id="dates-list"></div>
+                    <div style="margin-top: 16px; padding: 12px; background: hsla(40, 70%, 60%, 0.1); border-radius: 12px; text-align: center;">
+                        <p style="font-size: 14px; color: var(--muted);">
+                            💝 لا تنسى تحضير المفاجآت 🎁
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- رسالة الحب -->
+            <div class="card animate-slide-up" style="animation-delay: 0.7s; margin-top: 24px; background: linear-gradient(135deg, hsla(340, 55%, 60%, 0.2), hsla(340, 60%, 75%, 0.3), hsla(340, 45%, 85%, 0.2));">
+                <div class="section-title">
+                    <span class="animate-heart-beat" style="color: var(--rose);">❤️</span>
+                    رسالة من قلبي
+                    <span class="animate-heart-beat" style="color: var(--rose); animation-delay: 0.5s;">❤️</span>
+                </div>
+                
+                <div class="love-message-box">
+                    <p style="font-size: 18px; color: var(--foreground);">
+                        حبيبي الغالي، كل كلمة بكتبها هنا مش كفاية أوصفلك قد إيه بحبك.
+                        <br><br>
+                        أنت اللي بتخلي أيامي أحلى، واللي بتحولها من عادية لاستثنائية.
+                        <br><br>
+                        كل لحظة معاك هي هدية من ربنا، وأنا شاكر إني لقيتك.
+                        <br><br>
+                        أحبك أكتر من أي كلمة ممكن أقولها 💕
+                    </p>
+                    <div style="display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 16px; padding-top: 16px; border-top: 1px solid hsla(340, 60%, 75%, 0.3);">
+                        <span style="color: var(--rose);">❤️</span>
+                        <span style="color: var(--soft-pink);">~ مع كل حبي وإلى الأبد ~</span>
+                        <span style="color: var(--rose);">❤️</span>
+                    </div>
+                </div>
+
+                <p style="text-align: center; color: var(--muted); font-size: 14px; margin-bottom: 16px;">أو اكتب رسالتك الخاصة:</p>
+                <textarea id="custom-message" placeholder="اكتب كلام من قلبك هنا..." style="min-height: 100px; resize: none; margin-bottom: 16px;"></textarea>
+                <button class="btn" style="width: 100%;" onclick="sendLove()">
+                    <span id="send-btn-text">📤 أرسل الحب</span>
+                </button>
+            </div>
+        </main>
+
+        <!-- الفوتر -->
+        <footer class="footer">
+            <div style="display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 12px;">
+                <span style="color: var(--gold-accent);">✨</span>
+                <p style="color: var(--muted);">
+                    صنع بكل <span class="animate-heart-beat" style="display: inline-block;">❤️</span> لأجمل شخص في حياتي
+                </p>
+                <span style="color: var(--gold-accent);">✨</span>
+            </div>
+            <p style="color: var(--soft-pink); font-weight: 500; display: flex; align-items: center; justify-content: center; gap: 8px;">
+                <span>🎄</span>
+                كريسماس سعيد وسنة جديدة مليانة حب
+                <span>🎄</span>
+            </p>
+            <p style="color: var(--rose); font-weight: bold; margin-top: 8px; font-size: 18px;">🎄 2025 🎄</p>
+        </footer>
+    </div>
+
+    <!-- Lightbox للصور -->
+    <div id="lightbox" class="lightbox hidden">
+        <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+        <button class="lightbox-nav lightbox-prev" onclick="navigateLightbox('prev')">‹</button>
+        <div class="lightbox-content">
+            <img id="lightbox-image" src="" alt="">
+            <p class="lightbox-caption" id="lightbox-caption"></p>
+        </div>
+        <button class="lightbox-nav lightbox-next" onclick="navigateLightbox('next')">›</button>
+    </div>
